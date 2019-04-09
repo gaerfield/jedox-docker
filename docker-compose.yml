@@ -1,0 +1,22 @@
+version: '2'
+
+services:
+  jedox:
+    build:
+      context: https://github.com/gaerfield/jedox-docker.git
+      args:
+        JEDOX_DIST: "http://cdn.jedox.com/wp-content/downloads/software/2019/1/Jedox_2019_1_lin.tar"
+    image: jedox:2019-1
+    privileged: true
+    tty: true
+    ports:
+      - "8888:80"
+      - "17775:7775"
+      - "17777:7777"
+    volumes:
+      - "./data/conf:/jedox_conf"
+      - "./data/logs:/opt/jedox/ps/log"
+      - "./data/etl:/opt/jedox/ps/tomcat/webapps/etlserver/data"
+      - "./data/olap:/opt/jedox/ps/olap/data"
+      - "./data/storage:/opt/jedox/ps/storage"
+      - "./data/data:/opt/jedox/ps/Data"
